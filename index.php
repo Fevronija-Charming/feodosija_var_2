@@ -90,6 +90,8 @@ if (!function_exists('mb_strlen')) {
 }
 //новый заяц
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Wire\AMQPTable;
+use PhpAmqpLib\Wire\AMQPWriter;
 //$connection_rabbit_new = new AMQPSSLConnection($host_rabbit, $port_rabbit, $user_rabbit, $password_rabbit, '/', $sslOptions);
 $rabbit_host=getenv('RABBITHOST');
 $rabbit_port=getenv('RABBITPORT');
