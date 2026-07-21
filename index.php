@@ -111,7 +111,7 @@ $rabbit_connect=new AMQPStreamConnection($rabbit_host,$rabbit_port,$rabbit_usern
     //catch (Exception $e) {
     //echo 'Caught broker exception: ',  $e->getMessage(), "\n";
     //}
-$soobshenije="PRIVEEET!!!"
+$soobshenije="PRIVEEET!!!";
 $channel = $rabbit_connect->channel();
 //Объявление очереди (убеждаемся, что она существует)
 $channel->queue_declare('platoky_queue', false, false, false, false);
