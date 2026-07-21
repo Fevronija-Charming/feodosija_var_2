@@ -110,7 +110,6 @@ $rabbit_connect=new AMQPStreamConnection($rabbit_host,$rabbit_port,$rabbit_usern
     //echo 'Caught broker exception: ',  $e->getMessage(), "\n";
     //}
 $soobshenije="PRIVEEET!!!"
-try {
 $channel = $rabbit_connect->channel();
 //Объявление очереди (убеждаемся, что она существует)
 $channel->queue_declare('platoky_queue', false, false, false, false);
@@ -123,7 +122,4 @@ echo "Сообщение отправлено!";
 //Закрытие соединения
 $channel->close();
 $rabbit_connect->close();
-} catch (Exception $e) {
-    echo 'Caught broker exception: ',  $e->getMessage(), "\n";
-}
-    ?>
+?>
