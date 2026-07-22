@@ -101,7 +101,7 @@ $rabbit_password=getenv('RABBITPASSWORD');
 $rabbit_virtual_engine=getenv('RABBITVIRTUALENGINE');
 //подключение к брокеру
 $connection_rabbit_new = new AMQPSSLConnection($rabbit_host, $rabbit_port,$rabbit_username, $rabbit_password,$rabbit_virtual_engine, 
-["verify_peer"=>true]);
+["verify_peer"=>true],$keepalive = true,$heartbeat = 30);
 //$rabbit_connect=new AMQPStreamConnection($rabbit_host,$rabbit_port,$rabbit_username,$rabbit_password,$rabbit_virtual_engine,$insist = false,
   //  $login_method = 'AMQPLAIN',
     //$locale = null,
