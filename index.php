@@ -34,7 +34,7 @@ loadEnv(__DIR__ . '/.env');
 //сертификаты безопасности
 //$sslOptions = array(
 //  'cafile' => realpath(__DIR__ . '/isrgrootx1.pem'),
-);
+//);
 //сертификаты безопасности, пустышка
 $sslOptions = ["verify_peer"=>true,"verify_peer_name"=>true];
 //инициализация данных
