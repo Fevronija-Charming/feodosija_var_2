@@ -102,10 +102,10 @@ $rabbit_virtual_engine=getenv('RABBITVIRTUALENGINE');
 $rabbit_connect=new AMQPStreamConnection($rabbit_host,$rabbit_port,$rabbit_username,$rabbit_password,$rabbit_virtual_engine,$insist = false,
     $login_method = 'AMQPLAIN',
     $locale = null,
-    $connection_timeout = 3.0,
-    $read_write_timeout = 3.0,
+    $connection_timeout = 10.0,
+    $read_write_timeout = 10.0,
     $context = null,
-    $keepalive = true, // <-- Включите этот параметр
+    $keepalive = false, // <-- Включите этот параметр
     $heartbeat = 0);
     //} 
     //catch (Exception $e) {
