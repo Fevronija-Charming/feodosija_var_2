@@ -92,6 +92,7 @@ if (!function_exists('mb_strlen')) {
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Wire\AMQPTable;
 use PhpAmqpLib\Wire\AMQPWriter;
+use PhpAmqpLib\Wire\AMQPSSLConnection;
 //$connection_rabbit_new = new AMQPSSLConnection($host_rabbit, $port_rabbit, $user_rabbit, $password_rabbit, '/', $sslOptions);
 $rabbit_host=getenv('RABBITHOST');
 $rabbit_port=getenv('RABBITPORT');
@@ -99,20 +100,22 @@ $rabbit_username=getenv('RABBITUSERNAME');
 $rabbit_password=getenv('RABBITPASSWORD');
 $rabbit_virtual_engine=getenv('RABBITVIRTUALENGINE');
 //подключение к брокеру
-$rabbit_connect=new AMQPStreamConnection($rabbit_host,$rabbit_port,$rabbit_username,$rabbit_password,$rabbit_virtual_engine,$insist = false,
-    $login_method = 'AMQPLAIN',
-    $locale = null,
-    $connection_timeout = 10.0,
-    $read_write_timeout = 10.0,
-    $context = null,
-    $keepalive = false, // <-- Включите этот параметр
-    $heartbeat = 0);
+$connection_rabbit_new = new AMQPSSLConnection($rabbit_host, $rabbit_port,$rabbit_username, $rabbit_password,$rabbit_virtual_engine, 
+["verify_peer"=>true]);
+//$rabbit_connect=new AMQPStreamConnection($rabbit_host,$rabbit_port,$rabbit_username,$rabbit_password,$rabbit_virtual_engine,$insist = false,
+  //  $login_method = 'AMQPLAIN',
+    //$locale = null,
+    //$connection_timeout = 10.0,
+    //$read_write_timeout = 10.0,
+    //$context = null,
+    //$keepalive = false, // <-- Включите этот параметр
+    //$heartbeat = 0);
     //} 
     //catch (Exception $e) {
     //echo 'Caught broker exception: ',  $e->getMessage(), "\n";
     //}
 $soobshenije="PRIVEEET!!!";
-$channel = $rabbit_connect->channel();
+$channel = $connection_rabbit_new->channel();
 //Объявление очереди (убеждаемся, что она существует)
 $channel->queue_declare('platoky_queue', false, false, false, false);
 //Создание сообщения
@@ -123,5 +126,5 @@ $channel->basic_publish($msg, '', 'platoky_queue');
 echo "Сообщение отправлено!";
 //Закрытие соединения
 $channel->close();
-$rabbit_connect->close();
+$connection_rabbit_new->close();
 ?>
