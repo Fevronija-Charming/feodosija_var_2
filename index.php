@@ -92,7 +92,7 @@ if (!function_exists('mb_strlen')) {
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Wire\AMQPTable;
 use PhpAmqpLib\Wire\AMQPWriter;
-use PhpAmqpLib\Wire\AMQPSSLConnection;
+use PhpAmqpLib\Connection\AMQPSSLConnection;
 //$connection_rabbit_new = new AMQPSSLConnection($host_rabbit, $port_rabbit, $user_rabbit, $password_rabbit, '/', $sslOptions);
 $rabbit_host=getenv('RABBITHOST');
 $rabbit_port=getenv('RABBITPORT');
