@@ -99,6 +99,7 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Wire\AMQPTable;
 use PhpAmqpLib\Wire\AMQPWriter;
 use PhpAmqpLib\Connection\AMQPSSLConnection;
+use PhpAmqpLib\Message\AMQPMessage;
 $host_rabbit=getenv("STACKHERO_RABBITMQ_HOST");
 $port_rabbit=getenv("STACKHERO_RABBITMQ_AMQP_PORT_TLS");
 $password_rabbit=getenv("STACKHERO_RABBITMQ_PASSWORD");
