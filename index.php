@@ -32,11 +32,11 @@ function loadEnv($path) {
 // Загружаем файл из корня проекта
 loadEnv(__DIR__ . '/.env');
 //сертификаты безопасности
-//$sslOptions = array(
-//  'cafile' => realpath(__DIR__ . '/isrgrootx1.pem'),
-//);
+$sslOptions = array(
+  'cafile' => realpath(__DIR__ . '/isrgrootx1.pem'),
+);
 //сертификаты безопасности, пустышка
-$sslOptions = ["verify_peer"=>true,"verify_peer_name"=>true];
+//$sslOptions = ["verify_peer"=>true,"verify_peer_name"=>true];
 //инициализация данных
 //$platok_predstav=["Артикул","Название","Автор платка","Колорит 1","Колорит 2","Колорит 3",
 //"Колорит 4","Колорит 5","Узор темени","Узор сердцевины","Узор сторон","Узор углов","Узор краёв",
@@ -104,14 +104,14 @@ $host_rabbit=getenv("STACKHERO_RABBITMQ_HOST");
 $port_rabbit=getenv("STACKHERO_RABBITMQ_AMQP_PORT_TLS");
 $password_rabbit=getenv("STACKHERO_RABBITMQ_PASSWORD");
 $user_rabbit=getenv("STACKHERO_RABBITMQ_USER");
-//$connection_rabbit_new = new AMQPSSLConnection($host_rabbit, $port_rabbit, $user_rabbit, $password_rabbit, $sslOptions);
+$connection_rabbit_new = new AMQPSSLConnection($host_rabbit, $port_rabbit, $user_rabbit, $password_rabbit, $sslOptions);
 $rabbit_host=getenv('RABBITHOST');
 $rabbit_port=getenv('RABBITPORT');
 $rabbit_username=getenv('RABBITUSERNAME');
 $rabbit_password=getenv('RABBITPASSWORD');
 $rabbit_virtual_engine=getenv('RABBITVIRTUALENGINE');
 //подключение к брокеру
-$connection_rabbit = new AMQPSSLConnection($rabbit_host, $rabbit_port,$rabbit_username, $rabbit_password,$rabbit_virtual_engine,$sslOptions);
+//$connection_rabbit = new AMQPSSLConnection($rabbit_host, $rabbit_port,$rabbit_username, $rabbit_password,$rabbit_virtual_engine,$sslOptions);
 //$rabbit_connect=new AMQPStreamConnection($rabbit_host,$rabbit_port,$rabbit_username,$rabbit_password,$rabbit_virtual_engine,$insist = false,
   //  $login_method = 'AMQPLAIN',
     //$locale = null,
@@ -125,7 +125,7 @@ $connection_rabbit = new AMQPSSLConnection($rabbit_host, $rabbit_port,$rabbit_us
     //echo 'Caught broker exception: ',  $e->getMessage(), "\n";
     //}
 $soobshenije="PRIVEEET!!!";
-$channel = $connection_rabbit->channel();
+$channel = $connection_rabbit_new->channel();
 //Объявление очереди (убеждаемся, что она существует)
 $channel->queue_declare('platoky_queue', false, false, false, false);
 //Создание сообщения
@@ -136,5 +136,5 @@ $channel->basic_publish($msg, '', 'platoky_queue');
 echo "Сообщение отправлено!";
 //Закрытие соединения
 $channel->close();
-$connection_rabbit->close();
+$connection_rabbit_new->close();
 ?>
