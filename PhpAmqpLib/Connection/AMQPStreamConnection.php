@@ -105,8 +105,7 @@ class AMQPStreamConnection extends AbstractConnection
                                     $options['connection_timeout'] : 3.0;
         $read_write_timeout = isset($options['read_write_timeout']) ?
                                     $options['read_write_timeout'] : 3.0;
-        $context = isset($options['context']) ?
-                         $options['context'] : null;
+        $context = isset($options['ssl_context']) ? $options['ssl_context'] : null;
         $keepalive = isset($options['keepalive']) ?
                            $options['keepalive'] : false;
         $heartbeat = isset($options['heartbeat']) ?
