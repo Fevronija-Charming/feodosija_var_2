@@ -32,9 +32,11 @@ function loadEnv($path) {
 // Загружаем файл из корня проекта
 loadEnv(__DIR__ . '/.env');
 //сертификаты безопасности
-$sslOptions = array(
-  'cafile' => realpath(__DIR__ . '/isrgrootx1.pem'),
+//$sslOptions = array(
+//  'cafile' => realpath(__DIR__ . '/isrgrootx1.pem'),
 );
+//сертификаты безопасности, пустышка
+$sslOptions = ["verify_peer"=>true,"verify_peer_name"=>true];
 //инициализация данных
 //$platok_predstav=["Артикул","Название","Автор платка","Колорит 1","Колорит 2","Колорит 3",
 //"Колорит 4","Колорит 5","Узор темени","Узор сердцевины","Узор сторон","Узор углов","Узор краёв",
@@ -92,7 +94,7 @@ if (!function_exists('mb_strlen')) {
         return iconv_strlen($str, $encoding);
     }
 }
-//новый заяц
+//новый заяц, работает!!!
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use PhpAmqpLib\Wire\AMQPTable;
 use PhpAmqpLib\Wire\AMQPWriter;
@@ -101,15 +103,14 @@ $host_rabbit=getenv("STACKHERO_RABBITMQ_HOST");
 $port_rabbit=getenv("STACKHERO_RABBITMQ_AMQP_PORT_TLS");
 $password_rabbit=getenv("STACKHERO_RABBITMQ_PASSWORD");
 $user_rabbit=getenv("STACKHERO_RABBITMQ_USER");
-$connection_rabbit_new = new AMQPSSLConnection($host_rabbit, $port_rabbit, $user_rabbit, $password_rabbit, $sslOptions);
-//$rabbit_host=getenv('RABBITHOST');
-//$rabbit_port=getenv('RABBITPORT');
-//$rabbit_username=getenv('RABBITUSERNAME');
-//$rabbit_password=getenv('RABBITPASSWORD');
-//$rabbit_virtual_engine=getenv('RABBITVIRTUALENGINE');
+//$connection_rabbit_new = new AMQPSSLConnection($host_rabbit, $port_rabbit, $user_rabbit, $password_rabbit, $sslOptions);
+$rabbit_host=getenv('RABBITHOST');
+$rabbit_port=getenv('RABBITPORT');
+$rabbit_username=getenv('RABBITUSERNAME');
+$rabbit_password=getenv('RABBITPASSWORD');
+$rabbit_virtual_engine=getenv('RABBITVIRTUALENGINE');
 //подключение к брокеру
-//$connection_rabbit_new = new AMQPSSLConnection($rabbit_host, $rabbit_port,$rabbit_username, $rabbit_password,$rabbit_virtual_engine, 
-//["verify_peer"=>true],$keepalive = true,$heartbeat = 30);
+$connection_rabbit = new AMQPSSLConnection($rabbit_host, $rabbit_port,$rabbit_username, $rabbit_password,$rabbit_virtual_engine,$sslOptions);
 //$rabbit_connect=new AMQPStreamConnection($rabbit_host,$rabbit_port,$rabbit_username,$rabbit_password,$rabbit_virtual_engine,$insist = false,
   //  $login_method = 'AMQPLAIN',
     //$locale = null,
