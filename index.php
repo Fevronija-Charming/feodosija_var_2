@@ -124,7 +124,7 @@ $connection_rabbit = new AMQPSSLConnection($rabbit_host, $rabbit_port,$rabbit_us
     //echo 'Caught broker exception: ',  $e->getMessage(), "\n";
     //}
 $soobshenije="PRIVEEET!!!";
-$channel = $connection_rabbit_new->channel();
+$channel = $connection_rabbit->channel();
 //Объявление очереди (убеждаемся, что она существует)
 $channel->queue_declare('platoky_queue', false, false, false, false);
 //Создание сообщения
@@ -135,5 +135,5 @@ $channel->basic_publish($msg, '', 'platoky_queue');
 echo "Сообщение отправлено!";
 //Закрытие соединения
 $channel->close();
-$connection_rabbit_new->close();
+$connection_rabbit->close();
 ?>
